@@ -15,14 +15,14 @@ test:
     
 
 deployment:
-  staging:
+  production:
     branch: master
     codedeploy:
       circleci-s3:
-        application_root: /
-        region: us-east-1
+        deployment_group: production-instances
         revision_location:
           revision_type: S3
           s3_location:
             bucket: alm-nodejs
-            key_pattern: circleci-s3-{BRANCH}-{SHORT_COMMIT}
+            key_pattern: alm-nodejs-master-{SHORT_COMMIT}-{BUILD_NUM}
+        
