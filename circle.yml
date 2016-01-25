@@ -15,8 +15,14 @@ test:
     
 
 deployment:
-  hub:
+  staging:
     branch: master
-    commands:
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push pratiksha12/circlecijob1:$CIRCLE_SHA1
+    codedeploy:
+      circleci-s3:
+        application_root: /
+        region: us-east-1
+        revision_location:
+          revision_type: S3
+          s3_location:
+            bucket: alm-nodejs
+            key_pattern: circleci-s3-{BRANCH}-{SHORT_COMMIT}
